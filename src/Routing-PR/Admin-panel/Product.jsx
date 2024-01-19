@@ -1,0 +1,55 @@
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import AddToCart, { Count, addToCartAsync } from './reduxThunk/Action'
+import { Link } from 'react-router-dom'
+import '../Assets/css/main.css'
+const Product = () => {
+
+    const product = useSelector((state) => state.product)
+    const count = useSelector((state) => state.count)
+    // console.log(product)
+
+    const dispatch = useDispatch();
+
+    const handleAdd = (id) => {
+        dispatch(AddToCart(id))
+        dispatch(Count())
+    }
+    return (
+        <div className=' container px-3 overflow-scroll h-100'>
+            <div className="breadcrumb-header d-flex my-3 justify-content-between dark-card">
+                <div className="my-auto">
+                    <h4 className='text-white'>Product's</h4>
+                </div>
+                <Link className='btn btn-primary position-relative  px-4 py-6 fs-6' to={'/cart'}>
+                    Cart<i class="fa-solid fa-cart-arrow-down ms-2"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {count}
+                    </span>
+                </Link>
+            </div>
+            <div className="d-flex g-2 flex-wrap  ">
+                {
+                    product && product.map((item, id) => {
+                        return (
+                            <div key={id} className="col-3" >
+                                <div className="dark-card me-3 ">
+                                    <img src={item.image} alt="" className='img-fluid w-100' style={{ height: '300px', borderRadius: "3px" }} />
+                                    <div className="des d-flex mt-3 justify-content-between ">
+                                        <div className='text-white'>
+                                            <h6 className='mb-0'>{item.name}</h6>
+                                            <span>${item.price}</span>
+                                        </div>
+                                        <button className='btn btn-primary ' onClick={() => handleAdd(id)}><i class="fa-solid fa-cart-arrow-down"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        </div>
+    )
+}
+
+export default Product

@@ -1,0 +1,20 @@
+.text-theme{
+    color: #123a9e !important;
+}
+
+.dark-card{
+    background: #1a974a!important;
+    border: 1px solid #1f2940!important;
+    box-shadow: 0 0 10px rgba(28,39,60,.1);
+    border-radius: 7px;
+    padding: 20px 20px;
+}
+
+.header{
+    background-color: #b8c4e0;
+    height: 64px;
+    border-bottom: 1px solid rgba(222,228,236,.1);
+}
+
+
+
